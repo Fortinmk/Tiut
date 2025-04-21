@@ -1,0 +1,180 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MGKO Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+      font-family: 'Courier New', monospace;
+      color: #00ffcc;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    header {
+      text-align: center;
+      padding-top: 50px;
+      color: #00bfff;
+      text-shadow: 0 0 10px #00bfff, 0 0 20px #0077ff;
+      font-size: 2em;
+    }
+
+    .subtext {
+      font-size: 1em;
+      color: gold;
+      text-shadow: 0 0 5px gold;
+    }
+
+    .monkey-symbol {
+      font-size: 1.5em;
+      color: red;
+      text-shadow: 0 0 10px red, 0 0 20px #ff0000;
+      margin-top: 10px;
+    }
+
+    .button-wrapper {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .ancient-button {
+      background: #00ff99;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50%;
+      font-size: 24px;
+      font-family: 'Segoe UI', sans-serif;
+      color: #000;
+      text-shadow: 0 0 3px #fff;
+      box-shadow: 0 0 20px #00ff99;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .ancient-button:hover {
+      box-shadow: 0 0 40px #00ff99, 0 0 60px #00ff99;
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+
+  <header>
+    ⛧𓂀𓆣MGKO𓆣𓂀⛧
+    <div class="subtext">GLORIA DOMINO TAURI</div>
+    <div class="monkey-symbol">𓃠</div>
+  </header>
+
+  <div class="button-wrapper">
+    <button class="ancient-button">𓂋𓏤 𓈖𓂝</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const symbols = [
+      "𓀀","𓀁","𓀂","𓀃","𓁐","𓂀","𓃰","𓅓","𓆑",
+      "𓇋","𓈖","𓊃","𓋴","𓏏","𓐍","𓏤","𓎛","𓏲","𓍿","𓎡"
+    ];
+    
+    const fontSize = 22;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00ff00";
+      ctx.font = fontSize + "px 'Noto Sans Egyptian Hieroglyphs', sans-serif";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = symbols[Math.floor(Math.random() * symbols.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener("resize", () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+  </script>
+</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Spy Message</title>
+  <style>
+    #spy-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: pre-line;
+      font-family: 'Courier New', monospace;
+      font-size: 0.6em;
+      letter-spacing: 1px;
+      color: #00ccff;
+      text-shadow: 0 0 4px #00ccff, 0 0 8px #0088ff;
+      background: rgba(0, 0, 0, 0.15);
+      padding: 8px 16px;
+      border: 1px solid rgba(0, 204, 255, 0.4);
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(0, 204, 255, 0.4), 0 0 12px rgba(0, 204, 255, 0.2);
+      line-height: 1.6;
+      max-width: 90%;
+      text-align: center;
+      display: none;
+      backdrop-filter: blur(2px);
+      animation: fadeIn 2s ease-in-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="spy-text">
+  Welcome. You've arrived.  
+  We will contact you soon.  
+  – M
+</div>
+
+<script>
+  setTimeout(() => {
+    document.getElementById('spy-text').style.display = 'block';
+  }, 10000); // 10 ثواني
+</script>
+
+</body>
+</html>
